@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e
+
+names="@interrupt"
+adjectives=("hot fire" "wicked" "sick mad" "ace" "all-that-and-a-bag-of-chips" "amped" "beastly" "bomb" "butter" "capitol" "choice" "classic" "crisp" "dank" "diesel" "epic" "on fleek" "fetch" "fresh" "GOAT" "golden" "gr8" "gravy noodles" "horrorshow" "hype" "ill" "jolly good" "killer cheesin" "lit" "noice" "off the chain" "phenom" "popping fresh" "sugar honey ice tea" "stupid fresh" "vicious" "wizard")
+emojis=("sickburn" "fireball" "fire_engine" "boom" "boom-avocado" "partyparrot" "amaze" "butter" "calcifer" "chompy" "fidget-spinner" "flames" "partywhale2rotate" "partywizard" "porg" "tide-pod" "thank-you" "hot")
+greetings=("Yo" "Salutations" "Sup" "Howdy" "G'Day" "How do" "Ahoy" "S.P.D.S.V.B.E.E.V" "How's tricks")
+
+adjectives_length=${#adjectives[@]}
+emojis_length=${#emojis[@]}
+greetings_length=${#greetings[@]}
+
+adjective_index=$(($RANDOM % $adjectives_length))
+emoji_index=$(($RANDOM % $emojis_length))
+greeting_index=$(($RANDOM % $greetings_length))
+
+adjective=${adjectives[$adjective_index]}
+emoji=${emojis[$emoji_index]}
+greeting=${greetings[$greeting_index]}
+
+case $adjective in
+  [AEIOUaeiou]*)
+    article="an"
+    ;;
+  *)
+    article="a"
+    ;;
+esac
+
+messages=(
+"$greeting $names! Dropping $article $adjective patch on yo team :$emoji:"
+"$greeting $names! Got $article $adjective patch for you :$emoji:"
+"$greeting $names! Want a patch? We have good news! Here is $article $adjective patch :$emoji:"
+"$greeting $names! Patch time! Time for $article $adjective patch! :$emoji:"
+)
+
+messages_length=${#messages[@]}
+messages_index=$(($RANDOM % $messages_length))
+message=${messages[$messages_index]}
+
+echo $message
